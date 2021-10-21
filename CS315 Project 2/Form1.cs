@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace CS315_Project_2
 {
-    public partial class Form1 : Form
+    public partial class Converter : Form
     {
-        public Form1()
+        public Converter()
         {
             InitializeComponent();
         }
+
+        private void comboBoxFrom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
