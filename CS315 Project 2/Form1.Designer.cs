@@ -157,6 +157,7 @@ namespace CS315_Project_2
             this.buttonConvert.TabIndex = 9;
             this.buttonConvert.Text = "Convert";
             this.buttonConvert.UseVisualStyleBackColor = false;
+            this.buttonConvert.Click += new System.EventHandler(this.buttonConvert_Click);
             // 
             // buttonReset
             // 

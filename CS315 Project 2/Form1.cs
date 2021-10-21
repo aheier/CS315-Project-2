@@ -77,5 +77,17 @@ namespace CS315_Project_2
             }
             buttonConvert.Enabled = false;
         }
+
+        private void buttonConvert_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Double numberToConvert = Convert.ToDouble(inputTextFrom.Text);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Exception: {ex}");
+            }
+        }
     }
 }
