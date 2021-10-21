@@ -51,6 +51,7 @@ namespace CS315_Project_2
             this.inputTextFrom.Name = "inputTextFrom";
             this.inputTextFrom.Size = new System.Drawing.Size(100, 20);
             this.inputTextFrom.TabIndex = 0;
+            this.inputTextFrom.TextChanged += new System.EventHandler(this.inputTextFrom_TextChanged);
             // 
             // comboBoxFrom
             // 
@@ -86,6 +87,7 @@ namespace CS315_Project_2
             this.comboBoxTo.Name = "comboBoxTo";
             this.comboBoxTo.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTo.TabIndex = 2;
+            this.comboBoxTo.SelectedIndexChanged += new System.EventHandler(this.comboBoxTo_SelectedIndexChanged);
             // 
             // labelFrom
             // 
