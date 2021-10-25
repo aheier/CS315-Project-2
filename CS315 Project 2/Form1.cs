@@ -107,6 +107,7 @@ namespace CS315_Project_2
         {
             inputTextFrom.Text = "";
             inputTextTo.Text = "";
+            textBoxCalculation.Text = "";
         }
 
         private void buttonSwap_Click(object sender, EventArgs e)
