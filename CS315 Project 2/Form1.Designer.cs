@@ -157,6 +157,7 @@ namespace CS315_Project_2
             this.buttonConvert.TabIndex = 9;
             this.buttonConvert.Text = "Convert";
             this.buttonConvert.UseVisualStyleBackColor = false;
+            this.buttonConvert.Click += new System.EventHandler(this.buttonConvert_Click);
             // 
             // buttonReset
             // 
@@ -169,6 +170,7 @@ namespace CS315_Project_2
             this.buttonReset.TabIndex = 10;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = false;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // buttonSwap
             // 
@@ -181,6 +183,7 @@ namespace CS315_Project_2
             this.buttonSwap.TabIndex = 11;
             this.buttonSwap.Text = "Swap";
             this.buttonSwap.UseVisualStyleBackColor = false;
+            this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
             // 
             // labelInputFrom
             // 

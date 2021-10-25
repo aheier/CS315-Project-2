@@ -8,64 +8,88 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
-
 namespace CS315_Project_2
 {
     public partial class Converter : Form
     {
+        
 
-        private ArrayList unitsMeasurement = new ArrayList() {
+        private ArrayList unitsLength = new ArrayList() {
             "Inch (in)",
             "Centimeter (cm)",
             "Foot (ft)",
             "Yard (yd)",
             "Mile (mi)",
             "Kilometer (km)" };
-        private ArrayList unitsContainers = new ArrayList() {
+        private ArrayList unitsVolume = new ArrayList() {
             "Liter",
             "Gallon"};
-    public Converter()
+
+        Dictionary<string, string> Items = new Dictionary<string, string>();
+        //conversions to meters
+        Dictionary<string, double> Conversions = new Dictionary<string, double>();
+        public Converter()
         {
             InitializeComponent();
+            Items.Add("Inch (in)", "Inches");
+            Items.Add("Centimeter (cm)", "Centimeters");
+            Items.Add("Foot (ft)", "Feet");
+            Items.Add("Yard (yd)", "Yards");
+            Items.Add("Mile (mi)", "Miles");
+            Items.Add("Kilometer (km)", "Kilometers");
+            Items.Add("Liter", "Liters");
+            Items.Add("Gallon", "Gallons");
+            Conversions.Add("Inch (in)", 0.0254);
+            Conversions.Add("Centimeter (cm)", 0.01);
+            Conversions.Add("Foot (ft)", 0.3048);
+            Conversions.Add("Yard (yd)", 0.9144);
+            Conversions.Add("Mile (mi)", 1609.344);
+            Conversions.Add("Kilometer (km)", 1000);
+            Conversions.Add("Liter", 1);
+            Conversions.Add("Gallon", 3.78541178);
+
+
             buttonConvert.Enabled = false;
+            //buttonSwap.Enabled = false;
 
         }
-        
-        private void setConversionToLabelText()
+        private void setConversionToLabelText(string type)
         {
-            labelInputTo.Text = comboBoxTo.SelectedItem.ToString().Substring(0, comboBoxTo.SelectedItem.ToString().Length - 5) + 's';
+            labelInputTo.Text = Items[type];
         }
-        private void setConversionFromLabelText()
+        private void setConversionFromLabelText(string type)
         {
             //required to change, for gallons, es
-            labelInputFrom.Text = comboBoxFrom.SelectedItem.ToString().Substring(0, comboBoxFrom.SelectedItem.ToString().Length - 5) + 's';
+            labelInputFrom.Text = Items[type];
         }
 
         private void comboBoxFrom_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxTo.Items.Clear();
             comboBoxTo.SelectedItem = "";
-            if (unitsMeasurement.Contains(comboBoxFrom.SelectedItem)){
-                foreach (string item in unitsMeasurement)
+            if (unitsLength.Contains(comboBoxFrom.SelectedItem)){
+                foreach (string item in unitsLength)
                 {
                     comboBoxTo.Items.Add(item);
                 }
                 comboBoxTo.Items.Remove(comboBoxFrom.SelectedItem);
-                setConversionFromLabelText();
+                setConversionFromLabelText(comboBoxFrom.SelectedItem.ToString());
+                comboBoxTo.SelectedIndex = 0;
                 return;
             }
-            foreach(string item in unitsContainers)
+            foreach(string item in unitsVolume)
             {
                 comboBoxTo.Items.Add(item);
             }
             comboBoxTo.Items.Remove(comboBoxFrom.SelectedItem);
-            setConversionFromLabelText();
+            setConversionFromLabelText(comboBoxFrom.SelectedItem.ToString());
+            comboBoxTo.SelectedIndex = 0;
             return;
         }
 
         private void comboBoxTo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setConversionToLabelText();
+            setConversionToLabelText(comboBoxTo.SelectedItem.ToString());
         }
 
         private void inputTextFrom_TextChanged(object sender, EventArgs e)
@@ -76,6 +100,65 @@ namespace CS315_Project_2
                 return;
             }
             buttonConvert.Enabled = false;
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            inputTextFrom.Text = "";
+            inputTextTo.Text = "";
+        }
+
+        private void buttonSwap_Click(object sender, EventArgs e)
+        {
+            if (comboBoxFrom.SelectedItem == null || comboBoxTo.SelectedItem == null)
+                return;
+            object temp = comboBoxFrom.SelectedItem;
+            comboBoxFrom.SelectedItem = comboBoxTo.SelectedItem;
+            comboBoxTo.SelectedItem = temp;
+            if(buttonConvert.Enabled)
+                buttonConvert_Click(sender, e);
+        }
+
+        private void buttonConvert_Click(object sender, EventArgs e)
+        {
+            double number;
+            decimal display;
+            try
+            {
+                number = Convert.ToDouble(inputTextFrom.Text);
+                display = convertNumber(number, comboBoxFrom.SelectedItem.ToString(), comboBoxTo.SelectedItem.ToString());
+                inputTextTo.Text = roundNumber(display).ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return;
+            }
+            setCalculation();
+        }
+        private double conversionFactor(string from, string to)
+        {
+            return Conversions[from] / Conversions[to];
+        }
+        private decimal convertNumber(double number, string from, string to)
+        {
+            return Convert.ToDecimal(number * conversionFactor(from, to));
+        }
+        private decimal roundNumber(decimal number)
+        {
+            if(checkBoxDecimal.Checked)
+                return decimal.Round(number, 2);
+            return number;
+        }
+        private void setCalculation()
+        {
+            decimal conversionFactor = convertNumber(Convert.ToDouble(inputTextFrom.Text), comboBoxFrom.SelectedItem.ToString(), comboBoxTo.SelectedItem.ToString());
+            string calculation = $"{inputTextFrom.Text} {Items[comboBoxFrom.SelectedItem.ToString()]} is " +
+                $"{inputTextTo.Text} {Items[comboBoxTo.SelectedItem.ToString()]}\n\n";
+            string calculation2 = $"{inputTextFrom.Text} * " +
+                $"{decimal.Round(conversionFactor, 3)}" +
+                $" = {inputTextTo.Text}";
+            textBoxCalculation.Text = calculation + calculation2;
         }
     }
 }
