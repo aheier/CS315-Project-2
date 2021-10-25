@@ -52,6 +52,7 @@ namespace CS315_Project_2
             this.inputTextFrom.Size = new System.Drawing.Size(100, 20);
             this.inputTextFrom.TabIndex = 0;
             this.inputTextFrom.TextChanged += new System.EventHandler(this.inputTextFrom_TextChanged);
+            this.inputTextFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputTextFrom_KeyPress);
             // 
             // comboBoxFrom
             // 
@@ -126,7 +127,7 @@ namespace CS315_Project_2
             this.textBoxCalculation.Name = "textBoxCalculation";
             this.textBoxCalculation.Size = new System.Drawing.Size(302, 61);
             this.textBoxCalculation.TabIndex = 6;
-            this.textBoxCalculation.Text = "This is a calculation\nlskdfj\nAnother calculation";
+            this.textBoxCalculation.Text = "";
             // 
             // checkBoxDecimal
             // 
@@ -138,6 +139,7 @@ namespace CS315_Project_2
             this.checkBoxDecimal.TabIndex = 7;
             this.checkBoxDecimal.Text = "2 decimal places";
             this.checkBoxDecimal.UseVisualStyleBackColor = true;
+            this.checkBoxDecimal.CheckedChanged += new System.EventHandler(this.checkBoxDecimal_CheckedChanged);
             // 
             // inputTextTo
             // 
@@ -191,9 +193,9 @@ namespace CS315_Project_2
             this.labelInputFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelInputFrom.Location = new System.Drawing.Point(12, 141);
             this.labelInputFrom.Name = "labelInputFrom";
-            this.labelInputFrom.Size = new System.Drawing.Size(69, 16);
+            this.labelInputFrom.Size = new System.Drawing.Size(41, 16);
             this.labelInputFrom.TabIndex = 12;
-            this.labelInputFrom.Text = "Inches....";
+            this.labelInputFrom.Text = "Input";
             // 
             // labelInputTo
             // 
@@ -202,9 +204,9 @@ namespace CS315_Project_2
             this.labelInputTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelInputTo.Location = new System.Drawing.Point(12, 257);
             this.labelInputTo.Name = "labelInputTo";
-            this.labelInputTo.Size = new System.Drawing.Size(102, 16);
+            this.labelInputTo.Size = new System.Drawing.Size(52, 16);
             this.labelInputTo.TabIndex = 13;
-            this.labelInputTo.Text = "Centimeters...";
+            this.labelInputTo.Text = "Result";
             // 
             // Converter
             // 
