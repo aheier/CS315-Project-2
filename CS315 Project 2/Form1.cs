@@ -133,7 +133,8 @@ namespace CS315_Project_2
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Invalid Input, please input a valid number and have an option selected. \n Exception: {ex}");
+                inputTextFrom.Text = "";
                 return;
             }
             setCalculation();
